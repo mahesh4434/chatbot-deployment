@@ -89,5 +89,6 @@ def process_text():
     except requests.exceptions.RequestException as e:
         return jsonify({"error": f"Request failed: {str(e)}", "status_code": 500})
 
+
 if __name__ == '__main__':
     app.run(debug=True)
