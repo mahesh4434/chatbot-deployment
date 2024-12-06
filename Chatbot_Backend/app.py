@@ -66,13 +66,14 @@ def process_text():
 
         if response.status_code == 200:
             result = response.json()
-            
+
             # Log the result for further debugging
             logging.debug(f"Processed Response: {result}")
 
             # Ensure that the response contains the generated text
             if isinstance(result, list) and "generated_text" in result[0]:
-                return jsonify({"generated_text": result[0]["generated_text"]})
+                # Limit the response size to 1000 characters to avoid exceeding Vercel limits
+                return jsonify({"generated_text": result[0]["generated_text"][:1000]})
             else:
                 return jsonify({"error": "Unexpected response structure", "raw_response": result})
         else:
