@@ -89,5 +89,9 @@ def process_text():
     except requests.exceptions.RequestException as e:
         return jsonify({"error": f"Request failed: {str(e)}", "status_code": 500})
 
+# Handler for Vercel serverless function
+def handler(req, res):
+    return app(req, res)
+
 if __name__ == '__main__':
     app.run(debug=True)
