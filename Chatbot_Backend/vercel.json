@@ -5,7 +5,7 @@
       "src": "Chatbot_Backend/app.py",
       "use": "@vercel/python",
       "config": {
-        "maxDuration": 60
+        "maxDuration": 60  // Increase max duration for serverless function timeout to 60 seconds
       }
     }
   ],
