@@ -3,16 +3,13 @@
   "builds": [
     {
       "src": "Chatbot_Backend/app.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxDuration": 60  
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/process",
-      "dest": "/Chatbot_Backend/app.py"
+      "dest": "Chatbot_Backend/app.py"
     }
   ]
 }
