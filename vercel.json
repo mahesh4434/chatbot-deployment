@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "Ui/package.json",
+      "use": "@vercel/react"
+    },
+    {
       "src": "Chatbot_Backend/app.py",
       "use": "@vercel/python"
     }
@@ -10,6 +14,10 @@
     {
       "src": "/process",
       "dest": "Chatbot_Backend/app.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "Ui/$1"
     }
   ]
 }
