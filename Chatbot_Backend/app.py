@@ -9,7 +9,8 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 
 # Enable CORS for all routes, allowing requests from localhost:3000
-CORS(app, origins="https://chatbot-deployment-mu.vercel.app/")
+#CORS(app, origins="https://chatbot-deployment-mu.vercel.app/")
+CORS(app, resources={r"/*": {"origins": "https://chatbot-deployment-mu.vercel.app"}})
 
 # Hugging Face API details
 API_URL = "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-Coder-32B-Instruct"  # Change model name if needed
