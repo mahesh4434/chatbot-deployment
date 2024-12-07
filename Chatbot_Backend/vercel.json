@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "Chatbot_Backend/app.py",
+      "src": "./app.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/process",
-      "dest": "Chatbot_Backend/app.py"
+      "src": "/.*",
+      "dest": "/"
     }
   ]
 }
