@@ -33,7 +33,7 @@ const App = () => {
 
     try {
       // Send the request to Flask API with the modified input
-      const response = await axios.post('http://localhost:5000/process', {
+      const response = await axios.post('https://chatbot-deployment-e3gg.vercel.app/', {
         text: modifiedUserInput,
       });
 
