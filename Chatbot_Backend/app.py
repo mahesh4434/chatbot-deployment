@@ -8,6 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
+
 # Enable CORS for all routes, allowing requests from localhost:3000
 #CORS(app, origins="https://chatbot-deployment-mu.vercel.app/")
 CORS(app, resources={r"/*": {"origins": "https://maheshai.vercel.app"}})
