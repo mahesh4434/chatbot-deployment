@@ -12,7 +12,6 @@ const App = () => {
   };
 
   const formatBotResponse = (text) => {
-    // Split the response into individual points (here, split by "\n\n" or other delimiter)
     return text.split('\n\n').map((line, index) => ({
       text: line,
       isBot: true,
@@ -23,27 +22,24 @@ const App = () => {
     e.preventDefault();
     if (!userInput.trim()) return;
 
-    // Add user message to the chat
     setMessages([...messages, { text: userInput, isBot: false }]);
     setIsLoading(true);
     setUserInput('');
 
-    // Append " in DevOps" to the text before sending the request
     const modifiedUserInput = `${userInput} in DevOps`;
 
     try {
-      // Send the request to Flask API with the modified input
-      const response = await axios.post('https://chatbot-deployment-e3gg.vercel.app', {
-        text: modifiedUserInput,
-      });
+      const response = await axios.post(
+        'https://chatbot-deployment-e3gg.vercel.app/process',
+        { text: modifiedUserInput }
+      );
 
       const botMessage = response.data.generated_text || 'Sorry, I could not understand that.';
-      
-      // Format the bot's response into chat bubbles
       const formattedBotResponse = formatBotResponse(botMessage);
-      
+
       setMessages([...messages, { text: userInput, isBot: false }, ...formattedBotResponse]);
     } catch (error) {
+      console.error('Error while sending request:', error);
       setMessages([...messages, { text: userInput, isBot: false }, { text: 'Error: Could not connect to the server.', isBot: true }]);
     } finally {
       setIsLoading(false);
