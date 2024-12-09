@@ -22,6 +22,7 @@ const App = () => {
     e.preventDefault();
     if (!userInput.trim()) return;
 
+    // Add user message to the chat
     setMessages([...messages, { text: userInput, isBot: false }]);
     setIsLoading(true);
     setUserInput('');
@@ -29,18 +30,21 @@ const App = () => {
     const modifiedUserInput = `${userInput} in DevOps`;
 
     try {
-      const response = await axios.post(
-        'https://chatbot-deployment-e3gg.vercel.app/process',
-        { text: modifiedUserInput }
-      );
+      // Send the request to Flask API
+      const response = await axios.post('https://chatbot-deployment-e3gg.vercel.app/process', {
+        text: modifiedUserInput,
+      });
 
       const botMessage = response.data.generated_text || 'Sorry, I could not understand that.';
       const formattedBotResponse = formatBotResponse(botMessage);
 
       setMessages([...messages, { text: userInput, isBot: false }, ...formattedBotResponse]);
     } catch (error) {
-      console.error('Error while sending request:', error);
-      setMessages([...messages, { text: userInput, isBot: false }, { text: 'Error: Could not connect to the server.', isBot: true }]);
+      setMessages([
+        ...messages,
+        { text: userInput, isBot: false },
+        { text: 'Error: Could not connect to the server.', isBot: true },
+      ]);
     } finally {
       setIsLoading(false);
     }
